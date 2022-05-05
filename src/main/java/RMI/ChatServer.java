@@ -3,6 +3,7 @@ package RMI;
 import java.io.File;
 import java.io.FileInputStream;
 import java.rmi.RemoteException;
+import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,11 +16,12 @@ public class ChatServer extends UnicastRemoteObject implements ChatServerInt {
 	public Map<String, Integer> indexClient = new HashMap<>();
 	private String file = "";
 
+	
 	public ChatServer() throws RemoteException {
-		super();
+		super(Registry.REGISTRY_PORT);
 	}
 
-	@Override
+	@Override	
 	public boolean login(ChatClientInt a) throws RemoteException {
 		System.out.println("* [ " + a.getName() + " ] ==> got connected....");
 //		a.tell("You have Connected successfully.");
@@ -103,3 +105,4 @@ public class ChatServer extends UnicastRemoteObject implements ChatServerInt {
 		}
 	}
 }
+

@@ -16,30 +16,21 @@ import javax.swing.JPanel;
 @SuppressWarnings("deprecation")
 public class Main {
 	
+
+	//static Registry registry ;
+	
+	
 	public static void main(String[] args) {
 		try {
-			String ip = InetAddress.getLocalHost().getHostAddress();
-			int port = 1099;
-
-			System.out.println("Saisier l'ip de Host /ou/ Cleck Entre <--|:");
-			Scanner s = new Scanner(System.in);
-			ip = s.nextLine();
-			if (ip == null || ip.equals("") )
-				ip = InetAddress.getLocalHost().getHostAddress();
-
-			System.out.println("My ip is : " + ip);
-			System.out.println("Port :  : " + port);
-
-//			System.setSecurityManager(new RMISecurityManager());
-			java.rmi.registry.LocateRegistry.createRegistry(port);
-
-			ChatServer b = new ChatServer();
-			Naming.rebind("rmi://" + ip + "/chat", b);
+			LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
+			String ip = "localhost" ;		
+			ChatServer objChatServer = new ChatServer();
+			Naming.rebind("rmi://" + ip + "/chat", objChatServer);
+			System.out.println("rmi://" + ip + "/chat");
 			System.out.println("[System] Chat Server is ready.");
-			System.err.println("Server ready");
 			
 		} catch (Exception e) {
-			System.out.println("Chat Server failed: " + e);
+			System.out.println("Echec de démarrage du serveur de chat: " + e);
 		}
 	}
 }

@@ -3,4 +3,27 @@
   <groupId>loizswingformation</groupId>
   <artifactId>MavenServerRMI</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-</project>
+  <properties>
+     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+     <java.version>>1,8</java.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+ </properties>
+ <build>
+    <plugins>
+    <plugin>
+      <!-- Build an executable JAR -->
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-jar-plugin</artifactId>
+      <version>3.2.2</version>
+      <configuration>
+        <archive>
+          <manifest>
+            <mainClass>RMI.Main</mainClass>
+          </manifest>
+        </archive>          
+      </configuration>
+    </plugin>
+  </plugins>
+   </build>
+</project>  

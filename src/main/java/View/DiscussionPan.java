@@ -86,7 +86,9 @@ public class DiscussionPan extends JPanel {
 
 		String s = "";
 		try {
-			s = InetAddress.getLocalHost().getHostAddress();
+			s = InetAddress.getLocalHost().getHostAddress() ;
+//			s = "127.0.0.1:4023";
+//		    s = "localhost";
 		} catch (UnknownHostException e1) {
 			s = "";
 			e1.printStackTrace();
@@ -148,6 +150,7 @@ public class DiscussionPan extends JPanel {
 		panel.setPreferredSize(new Dimension(300, 650));
 		panel.add(ipLabel);
 		panel.add(ip);
+		System.out.println("Ip retenue (loiz): " + ip.getText());
 		panel.add(loginLabel);
 		panel.add(login);
 		panel.add(passwordLabel);
@@ -182,7 +185,9 @@ public class DiscussionPan extends JPanel {
 		try {
 			client = new ChatClient(login.getText());
 			client.setDiscussionPan(this);
-			server = (ChatServerInt) Naming.lookup("rmi://" + ip.getText().toString() + "/chat");
+			String sHostName = ip.getText().toString() ;
+			server = (ChatServerInt) Naming.lookup("rmi://" + sHostName + "/chat");
+			System.out.println("rmi://" + sHostName + "/chat") ;
 			server.login(client);
 			
 			updateUsers();
